@@ -40,16 +40,54 @@ PICII::inject(HANDLE handle, size_t size, unsigned char* payload, unsigned int l
 ```
 
 | Parameter | Description |
+## Usage 🚀
+```cpp
+PICII::inject(
+    HANDLE handle,
+    size_t size,
+    unsigned char* payload,
+    unsigned int length,
+    void* structPointer,
+    size_t structSize,
+    BYTE* pattern,
+    unsigned int patternSize,
+    bool debug
+);
+```
+
+| Parameter | Description |
 |---|---|
 | `handle` | Handle to the target process |
-| `size` | Memory pages to allocate for the payload (`0x1000`, `0x2000`) |
+| `size` | Memory size to allocate for the payload (`0x1000`, `0x2000`) |
 | `payload` | The shellcode to inject |
 | `length` | Size in bytes of the payload |
+| `structPointer` | Pointer to a structure copied into the remote process |
+| `structSize` | Size of the structure |
+| `pattern` | Byte pattern inside the payload to replace with the structure address |
+| `patternSize` | Size of the pattern |
 | `debug` | `true` to enable output, `false` to run silent |
+
 ```cpp
 // example
 HANDLE handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
-PICII::inject(handle, 0x1000, bin_payload, bin_payload_len, true);
+
+// example structure
+MyStruct data = { ... };
+
+// placeholder pattern inside payload
+BYTE pattern[] = { 0xDE, 0xAD, 0xBE, 0xEF };
+
+PICII::inject(
+    handle,
+    0x1000,
+    bin_payload,
+    bin_payload_len,
+    &data,
+    sizeof(data),
+    pattern,
+    sizeof(pattern),
+    true
+);
 ```
 
 To clean up:
