@@ -8,12 +8,14 @@ x86_64-w64-mingw32-g++ \
     -fno-rtti \
     -fPIC \
     -c payload.cpp -o bin/payload.o
+echo "=== Disassembly ==="
+objdump -d bin/payload.o
 echo "=== External references ===" 
 objdump -d bin/payload.o | grep "call\|jmp"
 objcopy -O binary \
     --only-section=.text \
     bin/payload.o bin/payload.bin
 xxd -i bin/payload.bin | sed 's/unsigned char/static unsigned char/g; s/unsigned int/static unsigned int/g' > bin/payload.hpp
+cat bin/payload.hpp
 echo "Done - $(wc -c < bin/payload.bin) bytes"
 rm -f bin/payload.o bin/payload.bin
- 

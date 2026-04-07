@@ -7,7 +7,5 @@ typedef BOOL (WINAPI* pBeep)(DWORD, DWORD);
 typedef void (WINAPI* pSleep)(DWORD);
 
 struct payloadStruct {
-    pBeep         beep;
-    pCreateThread createThread;
-    pSleep sleep;
+    volatile int flag;
 };

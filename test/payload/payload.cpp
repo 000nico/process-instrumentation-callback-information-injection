@@ -5,7 +5,6 @@
 extern "C" void payload(){
     volatile uintptr_t structPlaceHolder = 0xAAAAAAAAAAAAAAAA;
 
-    static volatile int executed = 0;
-    if(executed) return;
-    executed = 1;
+    payloadStruct* ps = (payloadStruct*)structPlaceHolder;
+    ps->flag = 9;
 }

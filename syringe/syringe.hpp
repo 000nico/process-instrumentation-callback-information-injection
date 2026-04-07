@@ -1,6 +1,8 @@
 # pragma once
 #include <windows.h>
 
+extern LPVOID structBaseAddr;
+
 namespace PICII {
     bool inject(HANDLE handle, size_t size, unsigned char* payload, unsigned int lenght, void* structPointer, size_t structSize, BYTE* pattern, unsigned int patternSize, bool debug);
     bool exit(HANDLE handle, bool debug);

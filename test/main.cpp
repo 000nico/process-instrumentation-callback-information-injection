@@ -4,7 +4,6 @@
 #include <iostream>
 
 int main(){
-
     HWND hwnd = FindWindowA(nullptr, "Untitled - Notepad");
     DWORD pid;
     GetWindowThreadProcessId(hwnd, &pid);
@@ -16,9 +15,7 @@ int main(){
 
     // struct
     payloadStruct ps = {};
-    ps.beep         = (pBeep)        GetProcAddress(GetModuleHandle("kernel32.dll"), "Beep");
-    ps.createThread = (pCreateThread)GetProcAddress(GetModuleHandle("kernel32.dll"), "CreateThread");
-    ps.sleep = (pSleep)GetProcAddress(GetModuleHandle("kernel32.dll"), "Sleep");
+    ps.flag = 0;
     
     HANDLE handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
     PICII::inject(handle, 
@@ -31,7 +28,9 @@ int main(){
         8,
         true);
 
-    Sleep(20000);
+    Sleep(10000);
+    ReadProcessMemory(handle, structBaseAddr, &ps, sizeof(ps), 0);
+    std::cout << "[test] flag = " << ps.flag << std::endl;
 
     PICII::exit(handle, true);
     CloseHandle(handle);

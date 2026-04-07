@@ -9,6 +9,7 @@ extern "C" void __attribute__((naked)) callback(){
         "push rbp\n"
         "push rdi\n"
         "push rsi\n"
+        "push rsp\n"
         "push r12\n"
         "push r13\n"
         "push r14\n"
@@ -21,13 +22,14 @@ extern "C" void __attribute__((naked)) callback(){
         "pop r14\n"
         "pop r13\n"
         "pop r12\n"
+        "pop rsp\n"
         "pop rsi\n"
         "pop rdi\n"
         "pop rbp\n"
         "pop rbx\n"
         "pop rcx\n"
         "pop rax\n"
-        "jmp rcx\n"
+        "jmp r10\n"
         ".att_syntax prefix\n"
     );
 }
