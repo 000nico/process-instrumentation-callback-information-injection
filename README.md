@@ -5,7 +5,7 @@ PICII is a shellcode injection technique that leverages `NtSetInformationProcess
 
 ---
 
-## How it works 🧠
+## How it works 
 
 `NtSetInformationProcess` lets you change how a process behaves, setting up internal structures at a low level.
 
@@ -23,7 +23,7 @@ process syscall
 ```
 ---
 
-## Architecture 🏗️
+## Architecture 
 
 PICII uses two separate memory allocations in the target process:
 
@@ -34,7 +34,7 @@ The wrapper address is registered as the Nirvana callback. It calls the payload 
 
 ---
 
-## Usage 🚀
+## Usage 
 ```cpp
 PICII::inject(
     HANDLE handle,
