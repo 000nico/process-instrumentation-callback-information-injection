@@ -1,4 +1,4 @@
-# PICII 🕳️
+# PICII 
 ### Process Instrumentation Callback Instrumentation Injection
 
 PICII is a shellcode injection technique that leverages `NtSetInformationProcess` with `_PROCESS_INSTRUMENTATION_CALLBACK_INFORMATION` to execute arbitrary shellcode in a remote process — without `CreateThread` or any standard execution primitive.
